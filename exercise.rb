@@ -103,7 +103,31 @@ isHosted: false
 }
 
 # new key-value pair is added in article with key is views and value is 0
-article = hash[:response][:results]
-article.each do |v|
+@article = hash[:response][:results]
+@article.each do |v|
    v[:views] = 0
 end
+
+puts @article
+
+def read_article
+   article_read = @article.sample
+   @article.each do |v|
+     if v == article_read
+       v[:views]+= 1
+     end
+   end
+
+end
+
+def display_views
+
+  @article.each do |v|
+    puts "Title : #{v[:webTitle]}"
+    puts "View count : #{v[:views]}"
+  end
+end
+
+10.times {read_article}
+
+puts display_views
